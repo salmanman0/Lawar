@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pengajuan Surat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="icon" href="../static/img/logo_lawar.png">
+    <link rel="stylesheet" href="../static/css/suket.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../static/img/lawar.png" alt="Logo" width="130" height="50"
+                        class="d-inline-block align-text-top">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                    aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <a class="navbar-brand" href="#">
+                            <img src="../static/img/lawar.png" alt="Logo" width="130" height="50"
+                                class="d-inline-block align-text-top">
+                        </a>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://103.150.191.178:5000">Sindawar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/buat-surat">Buat Surat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/informasi/pengurusan">Pengurusan Surat</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main id="app">
+        <div class="container px-4 py-5">
+            <h2 class="pb-2 border-bottom">Masukkan Data Warga</h2>
+            <div class="inputan mt-4">
+                <label for="pengajuan" class="form-label">Pengajuan Surat <span style="color: red;">*</span></label>
+                <select class="form-select" id="pengajuan" required>
+                    <option value="" disabled selected>Pilih jenis surat</option>
+                    <option value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option>
+                    <option value="Surat Keterangan Kematian">Surat Keterangan Kematian</option>
+                    <option value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
+                </select>
+            </div>
+
+            <div class="search border-bottom mb-3">
+                <div class="input-group mb-1">
+                    <input type="text" class="form-control" placeholder="Cari Warga" aria-label="Cari Warga"
+                        aria-describedby="basic-addon2" id="key">
+                    <button class="btn btn-info" id="search-btn">Cari</button>
+                </div>
+            </div>
+
+            <div class="data row d-none">
+                <div class="row">
+                    <div class="inputan col-6 mb-3">
+                        <label for="nama" class="form-label">Nama <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="nama" placeholder="" value="" required="" disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="nik" class="form-label">NIK<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="nik" placeholder="" value="" required="" disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="ttl" class="form-label">Tempat Tanggal Lahir<span
+                                style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="ttl" placeholder="" value="" required="" disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="jk" class="form-label">Jenis Kelamin<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="jk" placeholder="" value="" required="" disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="agama" class="form-label">Agama<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="agama" placeholder="" value="" required="" disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="status" class="form-label">Status Perkawinan<span
+                                style="color: red;">*</span></label>
+                        <select class="form-select" id="status" required>
+                            <option value="" disabled selected>Pilih status</option>
+                            <option>Menikah</option>
+                            <option>Belum Menikah</option>
+                        </select>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="pekerjaan" class="form-label">Pekerjaan<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="pekerjaan" placeholder="" value="" required=""
+                            disabled>
+                    </div>
+                    <div class="inputan col-6 mb-3">
+                        <label for="alamat" class="form-label">Alamat<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="alamat"
+                            placeholder="cth: Jl. Putri Ayu, RT 2, RW 10" value="" required="">
+                    </div>
+                    <div class="inputan mb-3">
+                        <label for="nomorHP" class="form-label">Nomor HP<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="nomorHP" placeholder="cth: 0813xxxxxxxx" value="" required="">
+                    </div>
+                    <!-- sktm -->
+                    <div class="inputan mb-3" id="miskin">
+                        <label for="keterangan" class="form-label">Keterangan Surat<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="keterangan" placeholder="Tujuan Pembuatan Surat" value="" required="">
+                    </div>
+                    <!-- skdu -->
+                    <div class="inputan col-6 mb-3" id="usaha_nama">
+                        <label for="nama_u" class="form-label">Nama Usaha<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="nama_u" placeholder="Nama Usaha" value="" required="">
+                    </div>
+                    <div class="inputan col-6 mb-3" id="usaha_alamat">
+                        <label for="alamat_u" class="form-label">Alamat Usaha<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="alamat_u" placeholder="Alamat Usaha" value="" required="">
+                    </div>
+                    <div class="inputan mb-3" id="usaha_tujuan">
+                        <label for="tujuan" class="form-label">Tujuan Pembuatan Surat<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="tujuan" placeholder="Tujuan Pembuatan Surat" value="" required="">
+                    </div>
+                    <!-- skk -->
+                    <div class="row" id="skk">
+                        <div class="inputan mb-3">
+                            <label for="hubungan_k" class="form-label">Hubungan Dengan Yang Meninggal<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="hubungan_k" placeholder="cth: Istri" value="" required="">
+                        </div>
+                        <h2 class="pb-2 border-bottom mt-2">Data Yang Meninggal</h2>
+                        <div class="inputan col-6 mb-3">
+                            <label for="nama_k" class="form-label">Nama <span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="nama_k" placeholder="" value="" required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="nik_k" class="form-label">NIK<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="nik_k" placeholder="" value="" required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="ttl_k" class="form-label">Tempat Tanggal Lahir<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="ttl_k" placeholder="cth: Medan, 16 April 2002"
+                                value="" required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="jk_k" class="form-label">Jenis Kelamin<span style="color: red;">*</span></label>
+                            <select class="form-select" id="jk_k" required>
+                                <option selected disabled>Pilih Jenis Kelamin</option>
+                                <option>Laki-Laki</option>
+                                <option>Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="agama_k" class="form-label">Agama<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="agama_k" placeholder="" value="" required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="status_k" class="form-label">Status Perkawinan<span
+                                    style="color: red;">*</span></label>
+                            <select class="form-select" id="status_k" required>
+                                <option selected disabled>Pilih status</option>
+                                <option>Menikah</option>
+                                <option>Belum Menikah</option>
+                            </select>
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="pekerjaan_k" class="form-label">Pekerjaan<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="pekerjaan_k" placeholder="" value=""
+                                required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="kewarganegaraan_k" class="form-label">Kewarganegaraan<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="kewarganegaraan_k" placeholder="cth: Indonesia"
+                                value="" required="">
+                        </div>
+                        <div class="inputan mb-3">
+                            <label for="alamat_k" class="form-label">Alamat<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="alamat_k" placeholder="cth: Jl. Putri Ayu, RT 2, RW 10"
+                                value="" required="">
+                        </div>
+
+                        <h2 class="pb-2 border-bottom mt-2">Waktu Meninggal</h2>
+                        <div class="inputan col-6 mb-3">
+                            <label for="hari_k" class="form-label">Hari<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="hari_k" placeholder="cth: Rabu" value=""
+                                required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="tanggal_k" class="form-label">Tanggal<span style="color: red;">*</span></label>
+                            <input type="date" class="form-control" id="tanggal_k" placeholder="" value="" required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="pukul_k" class="form-label">Pukul<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="pukul_k" placeholder="cth: 19.44" value=""
+                                required="">
+                        </div>
+                        <div class="inputan col-6 mb-3">
+                            <label for="bertempat_k" class="form-label">Bertempat di<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="bertempat_k" placeholder="cth: Pekanbaru"
+                                value="" required="">
+                        </div>
+                        <div class="inputan mb-3">
+                            <label for="penyebab_k" class="form-label">Penyebab<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" id="penyebab_k" placeholder="cth: Sakit Jantung"
+                                value="" required="">
+                        </div>
+                    </div>
+                    <button class="btn btn-success" id="ajukan">Ajukan</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../static/js/notifikasi-suket.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>daftar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+<script>
+    function daftar() {
+        let username = $('#username').val()
+        let rw = $('#rw').val()
+        let rt = $('#rt').val()
+        let nama = $('#nama').val()
+        let password = $('#password').val()
+        $.ajax({
+            type: "POST",
+            url: "/sign_up",
+            data: {
+                username_give: username,
+                code_give: rw,
+                rt_give: rt,
+                nick_give: nama,
+                password_give: password,
+            },
+            success: function (response) {
+                alert(response['msg'])
+                $('#username').val("")
+                $('#rw').val("")
+                $('#rt').val("")
+                $('#nama').val("")
+                $('#password').val("")
+            }
+        })
+    }
+</script>
+
+<body>
+    <input type="text" placeholder="username" id="username">
+    <br>
+    <input type="number" placeholder="rw" id="rw">
+    <br>
+    <input type="number" placeholder="rt" id="rt">
+    <br>
+    <input type="text" placeholder="nama" id="nama">
+    <br>
+    <input type="text" placeholder="password" id="password">
+    <br>
+    <button onclick="daftar()">Daftar</button>
+</body>
+
+</html>

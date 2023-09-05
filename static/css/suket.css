@@ -1,0 +1,28 @@
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+}
+
+label {
+    color: rgb(84, 84, 84);
+}
+
+#miskin{
+    display: none;
+}
+#usaha_nama{
+    display: none;
+}
+#usaha_alamat{
+    display: none;
+}
+#usaha_tujuan{
+    display: none;
+}
+#skk{
+    display: none;
+}

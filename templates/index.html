@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Layanan Warga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="../static/css/utama.css">
+    <link rel="icon" href="../static/img/logo_lawar.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function () {
+            if ("{{userinfo['role']}}" == 'rt') {
+                $(".f-rt").toggleClass("d-none d-block");
+            } else if ("{{userinfo['role']}}" == 'rw') {
+                $(".f-rw").toggleClass("d-none d-block");
+            } else if ("{{userinfo['role']}}" == 'lurah') {
+                $(".f-lurah").toggleClass("d-none d-block");
+            }
+        });
+    </script>
+    <style>
+        .f-lurah>h2 {
+            color: #9DC284;
+        }
+    </style>
+</head>
+
+<body>
+    <main id="app">
+        <div class="bg-top">
+            <nav class="navbar navbar-expand-lg bg-transparent text-body">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">
+                        <img src="../static/img/lawar.png" alt="Logo" width="130" height="50"
+                            class="d-inline-block align-text-top">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span> <img src="../static/img/Menu.png" alt="" height="30"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://103.150.191.178:5000">Sindawar</a>
+                            </li>
+                            {%if userinfo['role'] == "lurah"%}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Unduh Surat
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {%for i in range(totrw): %}
+                                    <li><a class="dropdown-item" href="/surat/{{i+1}}">RW {{i+1}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                            </li>
+                            {%endif%}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/informasi/pengurusan">Pengurusan Surat
+                                    {% if userinfo['role'] == "lurah" : %}
+                                    <span
+                                        class="position-absolute top-1 start-99 translate-middle badge rounded-pill bg-success">
+                                        {{status_1}}
+                                    </span>
+                                    {%endif%}
+                                </a>
+                            </li>
+                            {%if userinfo['role'] == "rw" :%}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/informasi/pengurusan/diizinkan">Surat Terselesaikan </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" href="/informasi/pengurusan/belum-diizinkan">
+                                    Surat Belum Terselesaikan
+                                    <span
+                                        class="position-absolute top-1 start-99 translate-middle badge rounded-pill bg-danger">
+                                        {{status_0}}
+                                        <span class="visually-hidden">Surat Belum Diizinkan</span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="top-page">
+                <div class="top-content">
+                    <img src="../static/img/logoPekanbaru.png" alt="" width="80">
+                    <h3 class="mb-4">
+                        Sukseskan Kelurahan Limbungan Untuk Kemajuan
+                    </h3>
+                    <h6>Kelurahan dengan segudang prestasi untuk mendukung Pekanbaru kota Madani dan memajukan
+                        digitalisasi pada setiap sektor. Selamat Datang {{userinfo['nick']}}!</h6>
+                </div>
+            </div>
+        </div>
+        <!-- fitur rt -->
+        <div class="container px-4 py-5 f-rt d-none" id="hanging-icon">
+            <h2 class="pb-2 border-bottom" style="color: #9DC284;">Kebutuhan Warga</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="col d-flex align-items-start">
+                    <div
+                        class="icon-square text-body-emphasis bg-body-white d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <img src="../static/img/ket.kematian.png" alt="" width="70">
+                    </div>
+                    <div>
+                        <h3 class="fs-2 text-body-emphasis">Surat Keterangan Kematian</h3>
+                        <p>Surat Keterangan Kematian adalah dokumen resmi yang dikeluarkan oleh pihak berwenang
+                            untuk memberikan informasi mengenai kematian seseorang.
+                        </p>
+                        <a href="/buat-surat" class="btn btn-success">
+                            Buat Surat
+                        </a>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div
+                        class="icon-square text-body-emphasis bg-body-white d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <img src="../static/img/ket.tmampu.png" alt="" width="70">
+                    </div>
+                    <div>
+                        <h3 class="fs-2 text-body-emphasis">Surat Keterangan Tidak Mampu</h3>
+                        <p>Dokumen yang dikeluarkan oleh pihak berwenang yang menyatakan bahwa seseorang tidak memiliki
+                            kemampuan finansial untuk memenuhi kebutuhan dasar hidup.
+                        </p>
+                        <a href="/buat-surat" class="btn btn-success">
+                            Buat Surat
+                        </a>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div
+                        class="icon-square text-body-emphasis bg-body-white d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <img src="../static/img/ket.usaha.png" alt="" width="70">
+                    </div>
+                    <div>
+                        <h3 class="fs-2 text-body-emphasis">Surat Keterangan Izin Usaha</h3>
+                        <p>dokumen resmi yang dikeluarkan oleh pihak berwenang untuk memberikan izin atau persetujuan
+                            kepada suatu entitas (perusahaan atau individu) untuk menjalankan aktivitas usaha tertentu.
+                        </p>
+                        <a href="/buat-surat" class="btn btn-success">
+                            Buat Surat
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fitur rw -->
+        <div class="container px-4 py-5 f-rw d-none" id="hanging-icon">
+            <h2 class="pb-2 border-bottom" style="color: #9DC284;">Kebutuhan Warga</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                <div class="col d-flex align-items-start">
+                    <div
+                        class="icon-square text-body-emphasis bg-body-white d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <img src="../static/img/Open_email.png" alt="" width="70">
+                    </div>
+                    <div>
+                        <h3 class="fs-2 text-body-emphasis">Surat Yang Telah Disetujui</h3>
+                        <h1 align="center" style="color: #51ca00;" class="my-4">{{status_1}} Surat</h1>
+                        <a href="/informasi/pengurusan/diizinkan" class="btn btn-success">
+                            Lihat
+                        </a>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <div
+                        class="icon-square text-body-emphasis bg-body-white d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                        <img src="../static/img/Important_Mail.png" alt="" width="70">
+                    </div>
+                    <div>
+                        <h3 class="fs-2 text-body-emphasis">Surat Yang Belum Disetujui</h3>
+                        <h1 align="center" style="color: red;" class="my-4">{{status_0}} Surat</h1>
+                        <a href="/informasi/pengurusan/belum-diizinkan" class="btn btn-success">
+                            Lihat
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- fitur lurah -->
+        {%if userinfo['role'] == "lurah" :%}
+        <div class="container px-4 py-5 f-lurah d-none" id="icon-grid">
+            <h2 class="pb-2 border-bottom">KELURAHAN LIMBUNGAN - RW</h2>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+                {%for i in range(totrw) :%}
+                <div class="col d-flex align-items-start">
+                    <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                    <div>
+                        {%if i < 9 :%}
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">RW 0{{i+1}}</h3>
+                        <p>Silahkan lihat daftar pengurusan surat dokumen pada RW 0{{i+1}}</p>
+                        {%else : %}
+                        <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">RW {{i+1}}</h3>
+                        <p>Silahkan lihat daftar pengurusan surat dokumen pada RW {{i+1}}</p>
+                        {%endif%}
+                    </div>
+                    <a class="btn btn-success" href='/surat/{{i+1}}'>Lihat</a>
+                </div>
+                {%endfor%}
+
+            </div>
+        </div>
+        {%endif%}
+    </main>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+</body>
+
+</html>
